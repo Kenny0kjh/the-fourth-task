@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .main {
+        margin: 200px auto;
+        width: 200px;
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+    }
+    
+    .header {
+        text-align: center;
+        font-size: large;
+    }
+    
+    .submit {
+        text-align: center;
+    }
+    
+    .right {
+        color: green;
+    }
+    
+    .wrong {
+        color: red;
+    }
+</style>
+
+<body>
+    <div class="main">
+        <label for="color">十六进制颜色</label>
+        <input type="text" id="color" placeholder="请输入十六进制颜色" onblur="return checkcolor()">
+        <p id="colormessage"></p>
+        <label for="url">URL</label>
+        <input type="text" id="URL" placeholder="请输入URL" onblur="return checkurl()">
+        <p id="urlmessage"></p>
+        <label for="chinese">是否包含中文</label>
+        <input type="text" id="chinese" placeholder="请任意输入" onblur="return checkchinese()">
+        <p id="chinesemessage"></p>
+</body>
+<script>
+    var colormessage = document.getElementById('colormessage')
+    var urlmessage = document.getElementById('urlmessage')
+    var chinesemessage = document.getElementById('chinesemessage')
+
+    function checkcolor() {
+        var regcolor = /#([0-9a-zA-Z0-9]{6}|[0-9a-zA-Z]{3})/;
+        if (regcolor.test(color.value)) {
+            colormessage.className = 'right';
+            colormessage.innerHTML = "十六进制颜色合法";
+            return true;
+        } else {
+            colormessage.className = 'wrong';
+            colormessage.innerHTML = "十六进制颜色不合法";
+            return false;
+        }
+    }
+
+    function checkurl() {
+        var regurl = /^((https?|ftp|file):\/\/)?([\da-z\.\-]+)\.([a-z\.]{2,6})([\/\w\.\-]*)*\/?$/;
+        if (regurl.test(URL.value)) {
+            urlmessage.className = 'right';
+            urlmessage.innerHTML = "URL合法";
+            return true;
+        } else {
+            urlmessage.className = 'wrong';
+            urlmessage.innerHTML = "URL不合法";
+            return false;
+        }
+    }
+
+    function checkchinese() {
+        var regchinese = /[\u4E00-\u9FA5]/g;
+        if (regchinese.test(chinese.value)) {
+            chinesemessage.className = 'right';
+            chinesemessage.innerHTML = "包含中文";
+            return true;
+        } else {
+            chinesemessage.className = 'wrong';
+            chinesemessage.innerHTML = "不包含中文";
+            return false;
+        }
+    }
+</script>
+
+</html>

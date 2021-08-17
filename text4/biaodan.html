@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .main {
+            margin: 200px auto;
+            width: 200px;
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            font-size: large;
+        }
+        
+        .submit {
+            text-align: center;
+        }
+        
+        .right {
+            color: green;
+        }
+        
+        .wrong {
+            color: red;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="main">
+        <div class="header">创建账户</div>
+        <label for="nm">用户名</label>
+        <input type="text" id="uname" placeholder="请输入用户名">
+        <p id="namemessage"></p>
+        <label for="ps">密码</label>
+        <input type="password" id="ups" placeholder="请输入密码">
+        <p id="passwordmessage"></p>
+        <label for="chps">确认密码</label>
+        <input type="password" id="cps" placeholder="请输入密码">
+        <p id="checkmessage"></p>
+        <label for="phn">手机号码</label>
+        <input type="text" id="pn" placeholder="请输入手机号码">
+        <p id="phonemessage"></p>
+        <input type="submit" value="提交" onclick="return checkname() ,checkpassword(),verify(),checkphone()">
+        <script>
+            // 获取信息
+            var namemessage = document.getElementById('namemessage')
+            var passwordmessage = document.getElementById('passwordmessage')
+            var checkmessage = document.getElementById('checkmessage')
+            var phonemessage = document.getElementById('phonemessage')
+                // 用户名检验
+            function checkname() {
+                var regUname = /^[a-zA-Z0-9_-]{4,16}$/;
+                if (regUname.test(uname.value)) {
+                    namemessage.className = 'right';
+                    namemessage.innerHTML = "用户名合法";
+                    return true;
+                } else {
+                    namemessage.className = 'wrong';
+                    namemessage.innerHTML = "用户名不合法";
+                    return false;
+                }
+
+            }
+            // 密码验证
+            function checkpassword() {
+                var regUps = /^1[012345]{2}[6789]{3}[a-zA-Z]{2}/;
+                if (regUps.test(ups.value)) {
+                    passwordmessage.className = 'right';
+                    passwordmessage.innerHTML = "密码合法";
+                    return true;
+                } else {
+                    passwordmessage.className = 'wrong';
+                    passwordmessage.innerHTML = "密码不合法";
+                    return false;
+                }
+            }
+            // 确认密码
+            function verify() {
+                if (cps.value == ups.value) {
+                    checkmessage.className = 'right';
+                    checkmessage.innerHTML = "密码一致";
+                    return true;
+                } else {
+                    checkmessage.className = 'wrong';
+                    checkmessage.innerHTML = "密码不合法或不一致";
+                    return false;
+                }
+            }
+            // 手机号验证
+            function checkphone() {
+                var regpn = /^1[3456789]{1}\d{9}/;
+                if (regpn.test(pn.value)) {
+                    phonemessage.className = 'right';
+                    phonemessage.innerHTML = "手机号合法";
+                    return true;
+                } else {
+                    phonemessage.className = 'wrong';
+                    phonemessage.innerHTML = "手机号不合法";
+                    return false;
+                }
+            }
+        </script>
+    </div>
+
+</body>
+
+</html>
